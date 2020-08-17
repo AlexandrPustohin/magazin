@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymelif.org" xmlns:background-color="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>Spring Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/jbootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Cart)}" />
+    <h1 class="table-info">
+        Корзина.
+    </h1>
+
+    <span th:if="${items.size()==0}">Корзина пустая</span>
+    <table th:if="${items.size()>0}"class="table table-dark">
+        <thead class="thead-dark">
+        <tr>
+            <td>ID</td>
+            <td>Название</td>
+            <td>Цена</td>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text ="${item.product.id}" />
+            <td th:text ="${item.product.title}" />
+            <td th:text ="${item.product.price}" />
+
+        </tr>
+        </tbody>
+    </table>
+    <a th:if="${items.size() > 0}" class="btn btn-success" th:href="@{/cart/create_order}">Оформить заказ</a>
+</div>
+</body>
+</html>

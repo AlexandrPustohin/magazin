@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymelif.org"
+      xmlns:background-color="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.tymelif.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title>Spring Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/jbootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div th:replace="~{navigation :: navigation(Shop)}" />
+        <h1 class="table-info">
+            Товар.
+        </h1>
+        <form    class="form-inline" th:action="@{'/find_by_title/'}">
+           <div >
+              <p> Введите название продукта:</p>
+           </div>
+              <div class="form-group mx-sm-3 mb-2">
+                  <input class="form-control" name="title">
+                  <!--<input type="submit" class="btn btn-primary" value="Найти">-->
+              </div>
+
+           <button type="submit" class="btn btn-primary mb-2">Найти</button>
+        </form>
+
+        <span th:if="${prod.size()==0}">Продуктов нет</span>
+        <table th:if="${prod.size()>0}"class="table table-dark">
+            <thead class="thead-dark">
+            <tr>
+                <td>ID</td>
+                <td>Название</td>
+                <td>Цена</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${prod}">
+                <td th:text ="${product.id}" />
+                <td th:text ="${product.title}" />
+                <td th:text ="${product.price}" />
+                <td><a class="btn btn-info"    th:href="@{'/details/'+${product.id}}">инфо</a></td>
+                <td><a class="btn btn-success" th:href="@{'/cart/add/'+${product.id}}">Добавить</a></td>
+                <td><a class="btn btn-danger"  th:href="@{'/products/delete/'+${product.id}} "
+                                               sec:authorize="hasRole('ADMIN')">Удалить</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
