@@ -30,7 +30,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //разрешаем все запросы, но в детали только админ
         //permitAll() - для всех
         http.authorizeRequests()
+
                 .antMatchers("/details/**").hasAnyRole("ADMIN")
+                .antMatchers("/create_order**").hasAnyRole("USER,ADMIN")
                 .anyRequest().permitAll()
                 .and().formLogin().loginPage("/login").permitAll()//тут страница где залогиниться
                 .loginProcessingUrl("/authenticateTheUser");//тут проверяем пользователя НЕ РЕАЛИЗОВАНО!!!

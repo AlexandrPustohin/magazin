@@ -46,10 +46,10 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping("/error")// обработчик запросов для соответсвующей страницы
-    public String errorPage(){
-        return "error";
-    }
+//    @GetMapping("/error")// обработчик запросов для соответсвующей страницы
+//    public String errorPage(){
+//        return "error";
+//    }
     @GetMapping("/admin")// обработчик запросов для соответсвующей страницы
     public String adminPage(){
         return "admin";
