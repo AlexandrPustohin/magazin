@@ -44,6 +44,7 @@ public class UserController {
         }
         user.setPassword("{noop}"+user.getPassword());
         userService.save(user);
+        authorityService.save(user);
         return "login";
     }
 }

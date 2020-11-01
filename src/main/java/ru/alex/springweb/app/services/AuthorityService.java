@@ -13,13 +13,13 @@ public class AuthorityService {
         this.authorityRepository = authorityRepository;
     }
     public Authority findByAuthority (String authority){
-        return authorityRepository.findById(authority).get();
+        return authorityRepository.findOneByAuthority(authority);
     }
 
     public void save(User username) {
         Authority authority = new Authority();
         authority.setUser(username);
-        authority.setAuthority(findByAuthority("ROLE_USER").getAuthority());
+        authority.setAuthority("ROLE_USER");
         authorityRepository.save(authority);
     }
 }

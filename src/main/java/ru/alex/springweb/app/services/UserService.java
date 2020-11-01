@@ -35,7 +35,7 @@ public class UserService {
     public void save(User user) {
         user.setEnabled(true);
         User newUser = userRepository.save(user);
-        authorityService.save(user);
+
 
 
 
